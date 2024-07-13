@@ -1,0 +1,75 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: #f3ebd9; /* Color de fondo */
+    font-family: 'Montserrat', Arial, sans-serif;
+}
+
+#app {
+    min-height: 100vh; /* Cambiado a 100vh para ocupar el 100% de la altura de la ventana */
+    width: 100%;
+    margin: auto;
+    background: #fff;
+    padding: 0px;
+    box-shadow: 0 0 0px rgba(0, 0, 0, 0.1);
+    border: 2px solid #ccc;
+    border-radius: 0px;
+    text-align: center; /* Centrar el contenido */
+}
+
+.header h3 {
+    background-color: #FBBA00; /* Barra azul */
+    color: #fff; /* Texto blanco */
+    padding: 22px;
+    margin: 0;
+    font-weight: normal; /* Esto quita la negrita */
+}
+
+.content {
+    margin-top: 100px;
+    font-weight: normal; /* Esto quita la negrita */
+}
+
+.content h3 {
+    font-weight: normal !important; /* Asegúrate de quitar la negrita */
+}
+
+.logo {
+    width: 200px;
+    margin-bottom: 1px;
+    margin-top: 90px;
+}
+
+.search-section {
+    margin-top: 20px;
+}
+
+.search-input {
+    width: calc(40% - 100px);
+    padding: 10px;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    font-size: 17px;
+    font-family: 'Montserrat', Arial, sans-serif;
+    background-color: #fff !important;
+    text-align: center;
+}
+
+.search-button {
+    padding: 10px 20px;
+    background-color: #FBBA00;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 17px; /* Tamaño de la letra en el botón */
+    font-family: 'Montserrat', Arial, sans-serif;
+}
+
+.search-button:hover {
+    background-color: #d29a00;
+}
+

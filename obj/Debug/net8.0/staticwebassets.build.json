@@ -1,0 +1,39 @@
+{
+  "Version": 1,
+  "Hash": "tN9gfE+tZW0ewlO6LXkbISzngzV5X9n1HPfgtkA/9IY=",
+  "Source": "CLIENTE",
+  "BasePath": "_content/CLIENTE",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "CLIENTE/wwwroot",
+      "Source": "CLIENTE",
+      "ContentRoot": "/Applications/XAMPP/xamppfiles/htdocs/LOGISTICA_FERRETERA/CLIENTE/wwwroot/",
+      "BasePath": "_content/CLIENTE",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "/Applications/XAMPP/xamppfiles/htdocs/LOGISTICA_FERRETERA/CLIENTE/wwwroot/logoferre.png",
+      "SourceId": "CLIENTE",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Applications/XAMPP/xamppfiles/htdocs/LOGISTICA_FERRETERA/CLIENTE/wwwroot/",
+      "BasePath": "_content/CLIENTE",
+      "RelativePath": "logoferre.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/logoferre.png"
+    }
+  ]
+}

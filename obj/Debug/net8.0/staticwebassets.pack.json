@@ -1,0 +1,25 @@
+{
+  "Files": [
+    {
+      "Id": "/Applications/XAMPP/xamppfiles/htdocs/LOGISTICA_FERRETERA/CLIENTE/wwwroot/logoferre.png",
+      "PackagePath": "staticwebassets/logoferre.png"
+    },
+    {
+      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.CLIENTE.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.build.CLIENTE.props",
+      "PackagePath": "build\\CLIENTE.props"
+    },
+    {
+      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.buildMultiTargeting.CLIENTE.props",
+      "PackagePath": "buildMultiTargeting\\CLIENTE.props"
+    },
+    {
+      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.buildTransitive.CLIENTE.props",
+      "PackagePath": "buildTransitive\\CLIENTE.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

@@ -1,0 +1,202 @@
+/* General Styles */
+html body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: #f3ebd9; /* Background color */
+    font-family: 'Montserrat', Arial, sans-serif; /* Font family */
+}
+
+/* Header Styles */
+.header {
+    background-color: #FBBA00; /* Header background color */
+    color: white; /* Header text color */
+    text-align: center; /* Center text */
+    padding: 1px; /* Padding */
+    font-weight: normal !important; /* Remove bold text */
+    font-size: 14px; /* Font size for header */
+}
+
+/* Content Styles */
+.content {
+    padding: 1rem; /* Padding */
+    font-size: 38px; /* Font size for content */
+}
+
+/* Filter Section Styles */
+.filter-section {
+    margin-bottom: 0rem; /* Bottom margin */
+}
+
+.filter-wrapper {
+    display: flex; /* Flexbox */
+    justify-content: space-between; /* Space between items */
+    align-items: center; /* Align items center */
+    padding: 1px; /* Padding */
+    background-color: #ffffff; /* Background color */
+    border-radius: 0px; /* Border radius */
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1); /* Box shadow */
+    margin-bottom: 0rem; /* Bottom margin */
+    margin: 20px; /* Margin */
+}
+
+.input-container {
+    position: relative; /* Position relative */
+    display: inline-block; /* Inline block */
+    font-size: 18px; /* Font size for input container */
+}
+
+.search-order-input {
+    width: calc(120% - 80px); /* Ajustamos el ancho para dejar espacio al botón */
+    padding: 10px 30px; /* Ajustamos el padding */
+    box-sizing: border-box;
+    font-size: 1rem;
+    border: 2px solid #ccc;
+    margin: 5px;
+    margin-left: 15px;
+}
+
+.search-order-icon {
+    position: absolute; /* Position absolute */
+    right: 20px; /* Right position */
+    top: 50%; /* Top position */
+    transform: translateY(-50%); /* Transform */
+    pointer-events: none; /* Pointer events none */
+    font-size: 1rem; /* Font size */
+}
+
+.search-order-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 50px; /* Ancho fijo del botón */
+    border: none;
+    background: transparent; /* Fondo blanco para que el botón sea visible */
+    cursor: pointer;
+    font-size: 1rem;
+    color: #aaa;
+}
+
+/* Results Section Styles */
+.results-section {
+    display: flex; /* Flexbox */
+    flex-direction: column; /* Column direction */
+    gap: 1rem; /* Gap between items */
+}
+
+.result-item {
+    position: relative; /* Position relative */
+    background-color: #ffffff; /* Background color */
+    padding: 20px; /* Padding */
+    border-radius: 0px; /* Border radius */
+    margin: 20px; /* Margin */
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1); /* Box shadow */
+    padding-top: 1px; /* Top padding */
+    margin-top: -10px;
+}
+
+.result-item::before {
+    content: ""; /* Content */
+    position: absolute; /* Position absolute */
+    top: 0; /* Top position */
+    left: 0; /* Left position */
+    width: 8px; /* Width */
+    background-color: rgb(148, 148, 148); /* Background color */
+    height: calc(100%); /* Height */
+    border-radius: 0px 0 0 0px; /* Border radius */
+}
+
+
+
+.result-item .linea {
+    border-top: 1px solid #ccc; /* Border top */
+    margin-top: -1px; /* Top margin */
+    margin-bottom: 10px; /* Bottom margin */
+    padding-top: 1px; /* Top padding */
+    padding-bottom: 1px; /* Bottom padding */
+}
+
+.result-item img {
+    display: block; /* Display block */
+    margin: 0 auto 10px auto; /* Center image with margin */
+}
+
+
+
+/* Estilos específicos para diferentes tamaños de fuente */
+.no-pedido, .fecha-compra {
+    font-size: 16px; /* Tamaño de fuente para No de pedido y Fecha de la compra */
+    font-weight: bold;
+}
+
+.pedido-realizado {
+    font-size: 13px; /* Tamaño de fuente para Pedido realizado */
+}
+
+.total-compra {
+    font-size: 27px; /* Tamaño de fuente para Total de la compra */
+    text-align: right; /* Alineación a la derecha */
+}
+
+.fecha-realizado {
+    font-size: 12px; /* Tamaño de fuente para la fecha de Pedido realizado */
+}
+
+.total-compra-valor {
+    font-size: 27px; /* Tamaño de fuente para el valor del total de la compra */
+}
+
+.result-item hr {
+    border: none; /* No border */
+    border-top: 2px solid #b6b6b6; /* Border top */
+    margin: 10px 0; /* Margin */
+    
+}
+
+.filter-label {
+    margin-right: 0.5rem; /* Right margin */
+    font-size: 10px; /* Font size for filter label */
+    color: #aaa;
+}
+
+.filter-input-wrapper {
+    width: 18%; /* Ancho completo del select */
+    padding: 1px; /* Padding */
+    font-size: 1rem; /* Tamaño de fuente */
+    border: none; /* Sin borde */
+    background-color: transparent; /* Fondo transparente */
+    cursor: pointer; /* Cursor de puntero */
+    border-bottom: 2px solid #b6b6b6; /* Border top */
+    margin-right: 15px;
+    
+}
+
+.flatpickr-input {
+    border: none; /* Quitar borde */
+    background: none; /* Fondo transparente */
+    font-size: 16px; /* Tamaño de fuente */
+    padding: 1px 1px; /* Espaciado interno */
+    cursor: pointer; /* Cambiar cursor */
+   
+    
+
+}
+
+.flatpickr-calendar {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra */
+    border-radius: 0px; /* Borde redondeado */
+    overflow: hidden; /* Ocultar desbordamiento */
+    
+    
+}
+
+.flatpickr-input-arrow {
+    position: absolute; /* Posición absoluta */
+    top: 23%; /* Centrado vertical */
+    right: 60px; /* Ajuste a la derecha */
+    transform: translateY(-50%) rotate(90deg); /* Centrado vertical y rotación */
+    color: #000000; /* Color del icono */
+    
+    
+}
