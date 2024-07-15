@@ -1,6 +1,22 @@
 {
   "Files": [
     {
+      "Id": "/Applications/XAMPP/xamppfiles/htdocs/LOGISTICA_FERRETERA/CLIENTE/wwwroot/ESTADO1.png",
+      "PackagePath": "staticwebassets/ESTADO1.png"
+    },
+    {
+      "Id": "/Applications/XAMPP/xamppfiles/htdocs/LOGISTICA_FERRETERA/CLIENTE/wwwroot/ESTADO2.png",
+      "PackagePath": "staticwebassets/ESTADO2.png"
+    },
+    {
+      "Id": "/Applications/XAMPP/xamppfiles/htdocs/LOGISTICA_FERRETERA/CLIENTE/wwwroot/ESTADO3.png",
+      "PackagePath": "staticwebassets/ESTADO3.png"
+    },
+    {
+      "Id": "/Applications/XAMPP/xamppfiles/htdocs/LOGISTICA_FERRETERA/CLIENTE/wwwroot/ESTADO4.png",
+      "PackagePath": "staticwebassets/ESTADO4.png"
+    },
+    {
       "Id": "/Applications/XAMPP/xamppfiles/htdocs/LOGISTICA_FERRETERA/CLIENTE/wwwroot/logoferre.png",
       "PackagePath": "staticwebassets/logoferre.png"
     },

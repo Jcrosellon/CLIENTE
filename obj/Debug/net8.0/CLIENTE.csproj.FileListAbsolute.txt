@@ -70,3 +70,4 @@
 /Applications/XAMPP/xamppfiles/htdocs/LOGISTICA_FERRETERA/CLIENTE/obj/Debug/net8.0/CLIENTE.genruntimeconfig.cache
 /Applications/XAMPP/xamppfiles/htdocs/LOGISTICA_FERRETERA/CLIENTE/obj/Debug/net8.0/ref/CLIENTE.dll
 /Applications/XAMPP/xamppfiles/htdocs/LOGISTICA_FERRETERA/CLIENTE/bin/Debug/net8.0/CLIENTE.staticwebassets.runtime.json
+/Applications/XAMPP/xamppfiles/htdocs/LOGISTICA_FERRETERA/CLIENTE/obj/Debug/net8.0/CLIENTE.sourcelink.json
