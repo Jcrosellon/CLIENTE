@@ -26,20 +26,15 @@ namespace CLIENTE
             // Configurar servicios de controladores
             services.AddControllers();
 
-            // Configurar CORS
+            // Configurar CORS si es necesario
             services.AddCors(options =>
             {
-                options.AddPolicy("AllowAll",
-                    builder =>
-                    {
-                        builder.AllowAnyOrigin()
-                               .AllowAnyMethod()
-                               .AllowAnyHeader();
-                    });
+                options.AddPolicy("AllowLocalhost",
+                    builder => builder
+                        .AllowAnyOrigin()
+                        .AllowAnyMethod()
+                        .AllowAnyHeader());
             });
-
-            // Agregar servicio de autorización si es necesario
-            services.AddAuthorization();
 
             // Otros servicios necesarios pueden ser agregados aquí
         }
@@ -54,10 +49,10 @@ namespace CLIENTE
                 app.UseDeveloperExceptionPage();
             }
 
-            // Usar CORS
-            app.UseCors("AllowAll");
+            // Usar CORS si está configurado
+            app.UseCors("AllowLocalhost");
 
-            // Usar middleware de autorización
+            // Usar middleware de autorización si es necesario
             app.UseAuthorization();
 
             // Configurar endpoints de controladores

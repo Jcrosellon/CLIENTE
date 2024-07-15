@@ -1,61 +1,68 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using CLIENTE.Data;
-using CLIENTE.Models;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace CLIENTE.Controllers
 {
+    [Route("api/[controller]")]
     [ApiController]
-    [Route("api/clientes/search")]
-    public class ClientesController : ControllerBase
+    public class PedidosController : ControllerBase
     {
-        private readonly AppDbContext _context;
+        private readonly YourDbContext _context;
 
-        public ClientesController(AppDbContext context)
+        public PedidosController(YourDbContext context)
         {
             _context = context;
         }
 
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Cliente>>> GetClientes()
-        {
-            return await _context.Clientes.ToListAsync();
-        }
-
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Cliente>> GetCliente(int id)
-        {
-            var cliente = await _context.Clientes.FindAsync(id);
-            if (cliente == null)
-            {
-                return NotFound();
-            }
-            return cliente;
-        }
-
+        // GET: api/pedidos/search?keyword=value&date=value
         [HttpGet("search")]
-        public async Task<ActionResult<IEnumerable<Cliente>>> SearchClientes(string keyword)
+        public async Task<ActionResult<IEnumerable<PedidoDto>>> SearchPedidos(string keyword, string date)
         {
-            if (string.IsNullOrEmpty(keyword))
+            var pedidos = _context.Pedidos.Include(p => p.Cliente).AsQueryable();
+
+            if (!string.IsNullOrEmpty(keyword))
             {
-                return BadRequest("Keyword is required");
+                pedidos = pedidos.Where(p => p.Cliente.Nombre.Contains(keyword) || p.Cliente.Nit.Contains(keyword));
             }
 
-#pragma warning disable CS8602 // Dereference of a possibly null reference.
-            var clientes = await _context.Clientes
-                                         .Where(c => c.Nombre.Contains(keyword) || c.NIT.Contains(keyword))
-                                         .ToListAsync();
-#pragma warning restore CS8602 // Dereference of a possibly null reference.
+            if (!string.IsNullOrEmpty(date))
+            {
+                if (DateTime.TryParse(date, out DateTime parsedDate))
+                {
+                    pedidos = pedidos.Where(p => p.Date.Date == parsedDate.Date);
+                }
+            }
 
-            return Ok(clientes);
+            var pedidosList = await pedidos.Select(p => new PedidoDto
+            {
+                Id = p.Id,
+                ClienteNombre = p.Cliente.Nombre,
+                ClienteNit = p.Cliente.Nit,
+                Date = p.Date,
+                StatusDate = p.StatusDate,
+                PreparingDate = p.PreparingDate,
+                ShippedDate = p.ShippedDate,
+                DeliveredDate = p.DeliveredDate,
+                Total = p.Total
+            }).ToListAsync();
+
+            return Ok(pedidosList);
         }
+    }
 
-
-        // Otros métodos (POST, PUT, DELETE)...
+    public class PedidoDto
+    {
+        public int Id { get; set; }
+        public string ClienteNombre { get; set; }
+        public string ClienteNit { get; set; }
+        public DateTime Date { get; set; }
+        public DateTime? StatusDate { get; set; }
+        public DateTime? PreparingDate { get; set; }
+        public DateTime? ShippedDate { get; set; }
+        public DateTime? DeliveredDate { get; set; }
+        public decimal Total { get; set; }
     }
 }
-
-

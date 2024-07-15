@@ -57,6 +57,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 return response.json();
             })
             .then(data => {
+                console.log('Datos recibidos:', data); // Añadir este log para verificar los datos recibidos
                 const resultsSection = document.querySelector('.results-section');
                 resultsSection.innerHTML = ''; // Limpiar el contenido anterior
 
@@ -70,13 +71,19 @@ document.addEventListener('DOMContentLoaded', function() {
                         // Verificar si order.total está definido antes de acceder a él
                         const total = order.total ? order.total.toFixed(2) : 'No disponible';
 
+                        // Verificar que todas las fechas estén definidas
+                        const orderDate = order.date ? formatDateMMDDYYYY(order.date) : 'No disponible';
+                        const statusDate = order.statusDate ? formatDateLong(order.statusDate) : 'No disponible';
+                        const preparingDate = order.preparingDate ? formatDateWithTime(order.preparingDate) : 'No disponible';
+                        const shippedDate = order.shippedDate ? formatDateWithTime(order.shippedDate) : 'No disponible';
+
                         resultDiv.innerHTML = `
                             <div style="display: flex; justify-content: space-between;">
                                 <div>
                                     <p class="no-pedido"><strong>No de pedido:</strong> ${order.id}</p>
                                 </div>
                                 <div>
-                                    <p class="fecha-compra"><strong>Fecha de la compra:</strong> ${formatDateMMDDYYYY(order.date)}</p>
+                                    <p class="fecha-compra"><strong>Fecha de la compra:</strong> ${orderDate}</p>
                                 </div>
                             </div>
                             <hr class="linea">
@@ -84,11 +91,11 @@ document.addEventListener('DOMContentLoaded', function() {
                                 <div style="text-align: center;">
                                     <img src="../wwwroot/ESTADO1.png" alt="Logo" style="width: 25px; height: 25px;">
                                     <p class="pedido-realizado"><strong>Pedido Realizado:</strong></p>
-                                    <p class="fecha-realizado">${formatDateLong(order.statusDate)}</p>
+                                    <p class="fecha-realizado">${statusDate}</p>
                                 </div>
                                 <div>
-                                    ${index >= 1 ? `<div><p><strong>Estamos preparando tu pedido:</strong></p><p>${formatDateWithTime(order.preparingDate)}</p></div>` : ''}
-                                    ${index >= 2 ? `<div><p><strong>Tu pedido fue despachado:</strong></p><p>${formatDateWithTime(order.shippedDate)}</p></div>` : ''}
+                                    ${index >= 1 ? `<div><p><strong>Estamos preparando tu pedido:</strong></p><p>${preparingDate}</p></div>` : ''}
+                                    ${index >= 2 ? `<div><p><strong>Tu pedido fue despachado:</strong></p><p>${shippedDate}</p></div>` : ''}
                                 </div>
                                 <div class="total-compra" style="margin-left: auto;">
                                     <p><strong>Total de la compra:</strong> $<span class="total-compra-valor">${total}</span></p>
