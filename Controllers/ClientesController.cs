@@ -21,42 +21,41 @@ namespace CLIENTE.Controllers
 
         // GET: api/clientes/search?keyword=value
         [HttpGet("search")]
-public async Task<ActionResult<IEnumerable<PedidoDto>>> SearchPedidos(string keyword)
-{
-    var pedidosQuery = _context.Pedidos.Include(p => p.Cliente).AsQueryable();
+        public async Task<ActionResult<IEnumerable<PedidoDto>>> SearchPedidos(string keyword)
+        {
+            var pedidosQuery = _context.Pedidos.Include(p => p.Cliente).AsQueryable();
 
-    if (!string.IsNullOrEmpty(keyword))
-    {
-        pedidosQuery = pedidosQuery.Where(p => p.Cliente != null &&
-                                   ((p.Cliente.Nombre != null && p.Cliente.Nombre.Contains(keyword)) ||
-                                    (p.Cliente.NIT != null && p.Cliente.NIT.Contains(keyword))));
+            if (!string.IsNullOrEmpty(keyword))
+            {
+                pedidosQuery = pedidosQuery.Where(p => p.Cliente != null &&
+                                       ((p.Cliente.Nombre != null && p.Cliente.Nombre.Contains(keyword)) ||
+                                        (p.Cliente.NIT != null && p.Cliente.NIT.Contains(keyword))));
+            }
+
+            var pedidosList = await pedidosQuery.ToListAsync();
+
+            var pedidosDtoList = pedidosList.Select(p => new PedidoDto
+            {
+                Id = p.Id,
+                ClienteNombre = p.Cliente?.Nombre ?? string.Empty,
+                ClienteNit = p.Cliente?.NIT ?? string.Empty,
+                Date = p.Date,
+                StatusDate = p.StatusDate,
+                PreparingDate = p.PreparingDate,
+                ShippedDate = p.ShippedDate,
+                DeliveredDate = p.DeliveredDate,
+                Total = p.Total
+            }).ToList();
+
+            return Ok(pedidosDtoList);
+        }
     }
-
-    var pedidosList = await pedidosQuery.ToListAsync();
-
-    var pedidosDtoList = pedidosList.Select(p => new PedidoDto
-    {
-        Id = p.Id,
-        ClienteNombre = p.Cliente?.Nombre ?? string.Empty,
-        ClienteNit = p.Cliente?.NIT ?? string.Empty,
-        Date = p.Date,
-        StatusDate = p.StatusDate,
-        PreparingDate = p.PreparingDate,
-        ShippedDate = p.ShippedDate,
-        DeliveredDate = p.DeliveredDate,
-        Total = p.Total
-    }).ToList();
-
-    return Ok(pedidosDtoList);
-}
-    }
-
 
     public class PedidoDto
     {
         public int Id { get; set; }
-        public string ClienteNombre { get; set; } = string.Empty; // Inicializado para evitar advertencias
-        public string ClienteNit { get; set; } = string.Empty;    // Inicializado para evitar advertencias
+        public string ClienteNombre { get; set; } = string.Empty;
+        public string ClienteNit { get; set; } = string.Empty;
         public DateTime Date { get; set; }
         public DateTime? StatusDate { get; set; }
         public DateTime? PreparingDate { get; set; }
@@ -65,5 +64,3 @@ public async Task<ActionResult<IEnumerable<PedidoDto>>> SearchPedidos(string key
         public decimal Total { get; set; }
     }
 }
-
-

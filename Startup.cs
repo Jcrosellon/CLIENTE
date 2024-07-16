@@ -19,29 +19,23 @@ namespace CLIENTE
 
         public void ConfigureServices(IServiceCollection services)
         {
-            // Configurar DbContext
             services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-            // Configurar servicios de controladores
             services.AddControllers();
 
-            // Configurar CORS si es necesario
             services.AddCors(options =>
             {
                 options.AddPolicy("AllowLocalhost",
                     builder => builder
-                        .AllowAnyOrigin()
+                        .WithOrigins("http://localhost", "http://localhost:80", "http://localhost:5139")
                         .AllowAnyMethod()
                         .AllowAnyHeader());
             });
-
-            // Otros servicios necesarios pueden ser agregados aquí
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            // Usar middleware de enrutamiento
             app.UseRouting();
 
             if (env.IsDevelopment())
@@ -49,19 +43,15 @@ namespace CLIENTE
                 app.UseDeveloperExceptionPage();
             }
 
-            // Usar CORS si está configurado
             app.UseCors("AllowLocalhost");
 
-            // Usar middleware de autorización si es necesario
             app.UseAuthorization();
 
-            // Configurar endpoints de controladores
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
             });
 
-            // Usar archivos estáticos si es necesario
             app.UseStaticFiles();
         }
     }
