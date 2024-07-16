@@ -19,63 +19,38 @@ namespace CLIENTE.Controllers
             _context = context;
         }
 
-        // GET: api/clientes/search?keyword=value&date=value
+        // GET: api/clientes/search?keyword=value
         [HttpGet("search")]
-public async Task<ActionResult<IEnumerable<PedidoDto>>> SearchPedidos(string keyword, string date)
+public async Task<ActionResult<IEnumerable<PedidoDto>>> SearchPedidos(string keyword)
 {
-    try
+    var pedidosQuery = _context.Pedidos.Include(p => p.Cliente).AsQueryable();
+
+    if (!string.IsNullOrEmpty(keyword))
     {
-        var pedidosQuery = _context.Pedidos.Include(p => p.Cliente).AsQueryable();
-
-        // Validación adicional de parámetros
-        if (string.IsNullOrEmpty(keyword) && string.IsNullOrEmpty(date))
-        {
-            return BadRequest("Debe proporcionar al menos un parámetro de búsqueda (keyword o date).");
-        }
-
-        if (!string.IsNullOrEmpty(keyword))
-        {
-            pedidosQuery = pedidosQuery.Where(p => p.Cliente != null &&
+        pedidosQuery = pedidosQuery.Where(p => p.Cliente != null &&
                                    ((p.Cliente.Nombre != null && p.Cliente.Nombre.Contains(keyword)) ||
                                     (p.Cliente.NIT != null && p.Cliente.NIT.Contains(keyword))));
-        }
-
-        if (!string.IsNullOrEmpty(date))
-        {
-            if (DateTime.TryParse(date, out DateTime parsedDate))
-            {
-                pedidosQuery = pedidosQuery.Where(p => p.Date.Date == parsedDate.Date);
-            }
-            else
-            {
-                return BadRequest("Formato de fecha incorrecto. Utilice el formato correcto para la fecha.");
-            }
-        }
-
-        var pedidosList = await pedidosQuery.ToListAsync();
-
-        var pedidosDtoList = pedidosList.Select(p => new PedidoDto
-        {
-            Id = p.Id,
-            ClienteNombre = p.Cliente?.Nombre ?? string.Empty,
-            ClienteNit = p.Cliente?.NIT ?? string.Empty,
-            Date = p.Date,
-            StatusDate = p.StatusDate,
-            PreparingDate = p.PreparingDate,
-            ShippedDate = p.ShippedDate,
-            DeliveredDate = p.DeliveredDate,
-            Total = p.Total
-        }).ToList();
-
-        return Ok(pedidosDtoList);
     }
-    catch (Exception ex)
+
+    var pedidosList = await pedidosQuery.ToListAsync();
+
+    var pedidosDtoList = pedidosList.Select(p => new PedidoDto
     {
-        // Manejar errores y loggear excepciones aquí
-        return BadRequest("Error al procesar la solicitud: " + ex.Message);
-    }
+        Id = p.Id,
+        ClienteNombre = p.Cliente?.Nombre ?? string.Empty,
+        ClienteNit = p.Cliente?.NIT ?? string.Empty,
+        Date = p.Date,
+        StatusDate = p.StatusDate,
+        PreparingDate = p.PreparingDate,
+        ShippedDate = p.ShippedDate,
+        DeliveredDate = p.DeliveredDate,
+        Total = p.Total
+    }).ToList();
+
+    return Ok(pedidosDtoList);
 }
     }
+
 
     public class PedidoDto
     {
@@ -90,3 +65,5 @@ public async Task<ActionResult<IEnumerable<PedidoDto>>> SearchPedidos(string key
         public decimal Total { get; set; }
     }
 }
+
+
