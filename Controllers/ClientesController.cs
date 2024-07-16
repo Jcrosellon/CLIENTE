@@ -3,21 +3,23 @@ using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CLIENTE.Data;
+using CLIENTE.Models;
 
 namespace CLIENTE.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PedidosController : ControllerBase
+    public class ClientesController : ControllerBase
     {
-        private readonly YourDbContext _context;
+        private readonly AppDbContext _context;
 
-        public PedidosController(YourDbContext context)
+        public ClientesController(AppDbContext context)
         {
             _context = context;
         }
 
-        // GET: api/pedidos/search?keyword=value&date=value
+        // GET: api/clientes/search?keyword=value&date=value
         [HttpGet("search")]
         public async Task<ActionResult<IEnumerable<PedidoDto>>> SearchPedidos(string keyword, string date)
         {
@@ -25,7 +27,9 @@ namespace CLIENTE.Controllers
 
             if (!string.IsNullOrEmpty(keyword))
             {
-                pedidos = pedidos.Where(p => p.Cliente.Nombre.Contains(keyword) || p.Cliente.Nit.Contains(keyword));
+                pedidos = pedidos.Where(p => p.Cliente != null && 
+                                             ((p.Cliente.Nombre != null && p.Cliente.Nombre.Contains(keyword)) || 
+                                              (p.Cliente.NIT != null && p.Cliente.NIT.Contains(keyword))));
             }
 
             if (!string.IsNullOrEmpty(date))
@@ -39,8 +43,8 @@ namespace CLIENTE.Controllers
             var pedidosList = await pedidos.Select(p => new PedidoDto
             {
                 Id = p.Id,
-                ClienteNombre = p.Cliente.Nombre,
-                ClienteNit = p.Cliente.Nit,
+                ClienteNombre = p.Cliente.Nombre ?? string.Empty,
+                ClienteNit = p.Cliente.NIT ?? string.Empty,
                 Date = p.Date,
                 StatusDate = p.StatusDate,
                 PreparingDate = p.PreparingDate,
@@ -56,8 +60,8 @@ namespace CLIENTE.Controllers
     public class PedidoDto
     {
         public int Id { get; set; }
-        public string ClienteNombre { get; set; }
-        public string ClienteNit { get; set; }
+        public string ClienteNombre { get; set; } = string.Empty; // Inicializado para evitar advertencias
+        public string ClienteNit { get; set; } = string.Empty;    // Inicializado para evitar advertencias
         public DateTime Date { get; set; }
         public DateTime? StatusDate { get; set; }
         public DateTime? PreparingDate { get; set; }

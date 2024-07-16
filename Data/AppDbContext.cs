@@ -3,9 +3,9 @@ using CLIENTE.Models;
 
 namespace CLIENTE.Data
 {
-    public class YourDbContext : DbContext
+    public class AppDbContext : DbContext
     {
-        public YourDbContext(DbContextOptions<YourDbContext> options) : base(options)
+        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
         }
 
