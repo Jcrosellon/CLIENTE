@@ -2,7 +2,7 @@ document.getElementById('searchButton').addEventListener('click', () => {
     const keyword = document.getElementById('searchInput').value.trim();
 
     if (keyword !== '') {
-        fetch(`http://localhost:5139/api/clientes/search?keyword=${encodeURIComponent(keyword)}`)
+        fetch(`http://localhost:5139/api/clientes/search/?keyword=${encodeURIComponent(keyword)}`)
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
